@@ -1,7 +1,10 @@
 import React from 'react';
 import cd from '../../assets/cd.png'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const ErrorPage = () => {
+
+    const navigate = useNavigate()
 
     const handleBack =()=>{
         navigate('/')
