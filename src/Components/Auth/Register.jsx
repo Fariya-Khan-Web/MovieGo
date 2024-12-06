@@ -3,10 +3,11 @@ import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
+import { updateCurrentUser, updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
-    const { createUser, loginGoogle } = useContext(AuthContext)
+    const { createUser, loginGoogle, user, setUser, updateUserProfile } = useContext(AuthContext)
 
     const [show, setShow] = useState(false)
 
@@ -26,20 +27,32 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user)
-                toast.success('User created successfully')
+                setUser(result.user)
+                updateUserProfile({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        console.log(`user name ${name}`)
+                    })
+                    .catch(err => { console.log(err) })
+                toast.success('User created successfully', { position: "top-center" })
             })
-            .catch(err => { console.log(err) })
+            .catch(err => {
+                console.log(err)
+                toast.error('Error', { position: "top-center" })
+            })
 
     }
 
-    const handleGoogle = () =>{
+    const handleGoogle = () => {
         loginGoogle()
-        .then(result => {
-            console.log(result.user)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(result => {
+                console.log(result.user)
+                setUser(result.user)
+                toast.success('User created successfully', { position: "top-center" })
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error('Error', { position: "top-center" })
+            })
     }
 
 
@@ -80,9 +93,9 @@ const Register = () => {
                         <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Register</button>
                     </div>
                 </form>
-                <button onClick={handleGoogle}  className="p-2 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl ">Login With Google</button>
+                <button onClick={handleGoogle} className="p-2 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl ">Login With Google</button>
                 {/* hover:font-semibold hover:bg-[#ffc107] */}
-                <p className='text-center my-4'>Already have an account? <Link to='/register' className='hover:text-[#ffc107] link'>Login</Link> now</p>
+                <p className='text-center my-4'>Already have an account? <Link to='/login' className='hover:text-[#ffc107] link'>Login</Link> now</p>
                 <div onClick={handleShow} className='absolute bottom-[230px] right-12' >
                     {show ? <TbEyeglassOff /> : <TbEyeglass />}
                 </div>

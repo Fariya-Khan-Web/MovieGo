@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
 
-    const { createUser, loginGoogle } = useContext(AuthContext)
+    const { loginUser, loginGoogle, user, setUser, loading, setLoading } = useContext(AuthContext)
 
     const [show, setShow] = useState(false)
 
@@ -14,13 +15,40 @@ const Login = () => {
         setShow(!show)
     }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        const form = new FormData(e.target)
+        const email = form.get('email')
+        const password = form.get('password')
+
+        loginUser(email, password)
+            .then(result => {
+                console.log(result.user)
+                setUser(result.user)
+                setLoading(false)
+                toast.success('User created successfully', {position: "top-center"})
+            })
+            .catch(err => { 
+                console.log(err) 
+                toast.error('Error', {position: "top-center"})
+            })
+
+    }
+
     const handleGoogle = () =>{
         loginGoogle()
         .then(result => {
             console.log(result.user)
+            setUser(result.user)
+            // setLoading(false)
+            toast.success('User created successfully', {position: "top-center"})
+
         })
         .catch(err => {
             console.log(err)
+            toast.error('Error', {position: "top-center"})
+
         })
     }
 
@@ -29,7 +57,7 @@ const Login = () => {
             <div className="card bg-[#222028] rounded-md w-[94%] max-w-md shrink-0 shadow-2xl my-10 relative">
                 <h1 className='font-semibold text-2xl mx-auto mt-6'>Login your account</h1>
                 <hr className=' w-10/12 mx-auto mt-6' />
-                <form className="card-body">
+                <form onSubmit={handleSubmit} className="card-body">
                     <div className="form-control">
                         <label className="label">
                             <span className=" ">Email</span>

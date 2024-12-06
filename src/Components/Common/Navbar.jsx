@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Navbar = () => {
+
+    const { user, signOutUser } = useContext(AuthContext)
+
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                toast.success('User signed out successfully', { position: "top-center" })
+            })
+    }
 
     const links =
         <>
             <Link className='hover:text-[#ffc107]'>Home</Link>
             <Link className='md:mx-3 hover:text-[#ffc107]'>All movies</Link>
-
-            <Link className='hover:text-[#ffc107]'>Add Movies</Link>
-            <Link className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
-
-            <Link className='hover:text-[#ffc107]'>My Favorites</Link>
+            {
+                user &&
+                <>
+                    <Link className='hover:text-[#ffc107]'>Add Movies</Link>
+                    <Link className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
+                </>
+            }
+            <Link className='hover:text-[#ffc107]'>something</Link>
         </>
 
 
@@ -48,8 +61,22 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login' className="py-2 px-4 border-r-0 border-2 border-[#ffc107] rounded-md hover:rounded-l-2xl rounded-r-none">Login</Link>
-                    <Link to='/register' className="py-2 px-4 border-2 border-[#ffc107] rounded-md hover:rounded-r-2xl rounded-l-none">Register</Link>
+                    {
+                        user ?
+                            <div className='flex'>
+                                <div className="btn btn-ghost btn-circle avatar">
+                                    <img className='w-full rounded-full'
+                                        alt="avatar"
+                                        src={user.photoURL} />
+                                </div>
+                                <Link onClick={handleSignOut} className="py-2 mx-2 px-4 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Sign Out</Link>
+                            </div>
+                            :
+                            <div>
+                                <Link to='/login' className="py-2 px-4 border-r-0 border-2 border-[#ffc107] rounded-md hover:rounded-l-2xl rounded-r-none">Login</Link>
+                                <Link to='/register' className="py-2 px-4 border-2 border-[#ffc107] rounded-md hover:rounded-r-2xl rounded-l-none">Register</Link>
+                            </div>
+                    }
                 </div>
             </div>
         </div>

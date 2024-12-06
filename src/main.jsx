@@ -14,6 +14,7 @@ import AddMovie from './Components/Layouts/AddMovie.jsx';
 import AuthProvider from './Components/Provider/AuthProvider.jsx';
 import Home from './Components/Layouts/Home.jsx';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
