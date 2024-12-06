@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
+
+
+    const { createUser, loginGoogle } = useContext(AuthContext)
 
     const [show, setShow] = useState(false)
 
     const handleShow = () => {
         setShow(!show)
+    }
+
+    const handleGoogle = () =>{
+        loginGoogle()
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -33,12 +47,12 @@ const Login = () => {
                     </div>
                     <div className="form-control mt-3">
                         <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login</button>
-                        <button className="p-2 my-3 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login With Google</button>
                     </div>
-                    <p>Don't have an account? <Link to='/register' className='hover:text-[#ffc107] link'>Register</Link> now</p>
                 </form>
+                <button onClick={handleGoogle} className="p-2 my-3 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login With Google</button>
+                <p className='text-center my-4'>Don't have an account? <Link to='/register' className='hover:text-[#ffc107] link'>Register</Link> now</p>
                 <div onClick={handleShow} className='absolute bottom-[244px] right-12' >
-                    {show? <TbEyeglassOff />: <TbEyeglass/>}
+                    {show ? <TbEyeglassOff /> : <TbEyeglass />}
                 </div>
             </div>
         </div>

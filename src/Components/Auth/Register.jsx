@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Register = () => {
 
-    const {createUser} = useContext(AuthContext)
+    const { createUser, loginGoogle } = useContext(AuthContext)
 
     const [show, setShow] = useState(false)
 
@@ -13,7 +14,7 @@ const Register = () => {
         setShow(!show)
     }
 
-    const handleSubmit = e =>{
+    const handleSubmit = e => {
         e.preventDefault()
 
         const form = new FormData(e.target)
@@ -23,13 +24,24 @@ const Register = () => {
         const password = form.get('password')
 
         createUser(email, password)
-        .then(result => {
-            console.log(result)
-            
-        })
-        .catch(err => {console.log(err)})
+            .then(result => {
+                console.log(result.user)
+                toast.success('User created successfully')
+            })
+            .catch(err => { console.log(err) })
 
     }
+
+    const handleGoogle = () =>{
+        loginGoogle()
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <div className='flex justify-center items-center'>
@@ -65,13 +77,14 @@ const Register = () => {
                         </label>
                     </div>
                     <div className="form-control mt-3">
-                        <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login</button>
-                        <button className="p-2 my-3 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login With Google</button>
+                        <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Register</button>
                     </div>
-                    <p>Already have an account? <Link to='/register' className='hover:text-[#ffc107] link'>Login</Link> now</p>
                 </form>
-                <div onClick={handleShow} className='absolute bottom-[244px] right-12' >
-                    {show? <TbEyeglassOff />: <TbEyeglass/>}
+                <button onClick={handleGoogle}  className="p-2 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl ">Login With Google</button>
+                {/* hover:font-semibold hover:bg-[#ffc107] */}
+                <p className='text-center my-4'>Already have an account? <Link to='/register' className='hover:text-[#ffc107] link'>Login</Link> now</p>
+                <div onClick={handleShow} className='absolute bottom-[230px] right-12' >
+                    {show ? <TbEyeglassOff /> : <TbEyeglass />}
                 </div>
             </div>
         </div>

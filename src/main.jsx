@@ -13,6 +13,7 @@ import AllMovies from './Components/Layouts/AllMovies.jsx';
 import AddMovie from './Components/Layouts/AddMovie.jsx';
 import AuthProvider from './Components/Provider/AuthProvider.jsx';
 import Home from './Components/Layouts/Home.jsx';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </AuthProvider>
   </StrictMode>,
 )
