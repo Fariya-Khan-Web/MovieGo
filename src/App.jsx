@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen text-white bg-[#1a191f] flex flex-col justify-between">
       <Navbar/>
       <Outlet/>
       <Footer/>

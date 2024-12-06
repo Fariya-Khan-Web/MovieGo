@@ -11,39 +11,44 @@ import Login from './Components/Auth/Login.jsx';
 import Register from './Components/Auth/Register.jsx';
 import AllMovies from './Components/Layouts/AllMovies.jsx';
 import AddMovie from './Components/Layouts/AddMovie.jsx';
+import AuthProvider from './Components/Provider/AuthProvider.jsx';
+import Home from './Components/Layouts/Home.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
-    errorElement:<ErrorPage/>,
-    children:[
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
       {
-        path:'/login',
-        element:<Login/>
+        path: '/',
+        element: <Home />
       },
       {
-        path:'/register',
-        element:<Register/>
+        path: '/login',
+        element: <Login />
       },
       {
-        path:'/allmovie',
-        element:<AllMovies/>
+        path: '/register',
+        element: <Register />
       },
       {
-        path:'/addmovie',
-        element:<AddMovie/>
+        path: '/allmovie',
+        element: <AllMovies />
       },
       {
-        path:'/login',
-        element:<Login/>
+        path: '/addmovie',
+        element: <AddMovie />
       },
+      
     ]
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-     <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
