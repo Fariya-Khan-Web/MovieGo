@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import star from '../../assets/star-half-empty.png'
+import Swal from 'sweetalert2';
 
 const Details = () => {
 
     const { id } = useParams()
-
     const [movie, setMovie] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`http://localhost:3000/movies/${id}`)
@@ -17,21 +19,48 @@ const Details = () => {
             })
     }, [])
 
-    const { title, Poster, genre, rating,  duration, year, description } = movie
+    const { _id, title, Poster, genre, rating, duration, year, description } = movie
 
-    const handleDelete = () =>{
-        
+    const handleDelete = (id) => {
 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:3000/movies/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Movie removed from the list",
+                                icon: "success"
+                            });
+                            navigate(-1)
+                        }
+                    })
+            }
+        });
     }
 
-    console.log(id)
+
     return (
         <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
             <div className=' md:flex  gap-5'>
                 <img className='h-[500px] mx-auto rounded' src={Poster} alt="" />
                 <div className=''>
                     <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
-                    <hr className='my-5 w-[80%]'/>
+                    <hr className='my-5 w-[80%]' />
                     <div className='md:text-lg lg:text-xl my-5 md:w-[70%]'>{description}</div>
                     <div className='flex-grow font-bold lg:text-2xl md:text-xl'>
                         <div className=' my-3'>Release Year: <span className='font-normal'>{year}</span></div>
@@ -46,7 +75,7 @@ const Details = () => {
             </div>
             <div className='grid grid-cols-2 gap-4 my-6'>
                 <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
-                <button onClick={handleDelete} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
+                <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
             </div>
         </div>
     );

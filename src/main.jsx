@@ -16,6 +16,8 @@ import Home from './Components/Layouts/Home.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Details from './Components/HomeComp/Details.jsx';
+import Favorites from './Components/Layouts/Favorites.jsx';
+import PrivateRoute from './Components/Private/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,12 +44,16 @@ const router = createBrowserRouter([
       {
         path: '/allmovie/:id',
         loader: ({params})=> fetch(`http://localhost:5173/allmovie/${params.id}`),
-        element:<Details/>
+        element: <PrivateRoute><Details/></PrivateRoute>
       },
       {
         path: '/addmovie',
-        element: <AddMovie />
+        element: <PrivateRoute><AddMovie /></PrivateRoute>
       },
+      {
+        path: '/myfavorites',
+        element: <PrivateRoute><Favorites/></PrivateRoute>
+      }
       
     ]
   },

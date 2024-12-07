@@ -31,7 +31,7 @@ const Navbar = () => {
                 user &&
                 <>
                     <Link to='/addmovie' className='hover:text-[#ffc107]'>Add Movies</Link>
-                    <Link to='/favorites' className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
+                    <Link to='/myfavorites' className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
                 </>
             }
             <Link to='/' className='hover:text-[#ffc107]'>Contact Us</Link>

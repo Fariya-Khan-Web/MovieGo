@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 import { updateCurrentUser, updateProfile } from 'firebase/auth';
@@ -8,8 +8,10 @@ import { updateCurrentUser, updateProfile } from 'firebase/auth';
 const Register = () => {
 
     const { createUser, loginGoogle, user, setUser, updateUserProfile } = useContext(AuthContext)
-
     const [show, setShow] = useState(false)
+
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleShow = () => {
         setShow(!show)
@@ -46,6 +48,7 @@ const Register = () => {
                     })
                     .catch(err => { console.log(err) })
                 toast.success('User created successfully', { position: "top-center" })
+                navigate(location?.state ? location?.state : '/')
             })
             .catch(err => {
                 console.log(err)
@@ -60,6 +63,7 @@ const Register = () => {
                 console.log(result.user)
                 setUser(result.user)
                 toast.success('User created successfully', { position: "top-center" })
+                navigate(location?.state ? location?.state : '/')
             })
             .catch(err => {
                 console.log(err)

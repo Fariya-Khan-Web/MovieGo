@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { TbEyeglass, TbEyeglassOff } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 
@@ -8,8 +8,11 @@ const Login = () => {
 
 
     const { loginUser, loginGoogle, user, setUser, loading, setLoading } = useContext(AuthContext)
-
     const [show, setShow] = useState(false)
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
 
     const handleShow = () => {
         setShow(!show)
@@ -28,6 +31,7 @@ const Login = () => {
                 setUser(result.user)
                 setLoading(false)
                 toast.success('User created successfully', {position: "top-center"})
+                navigate(location?.state ? location?.state : '/')
             })
             .catch(err => { 
                 console.log(err) 
@@ -43,6 +47,7 @@ const Login = () => {
             setUser(result.user)
             // setLoading(false)
             toast.success('User created successfully', {position: "top-center"})
+            navigate(location?.state ? location?.state : '/')
 
         })
         .catch(err => {
