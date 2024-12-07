@@ -57,7 +57,6 @@ const AddMovie = () => {
     }
 
 
-
     return (
         <div>
             <div className='text-center w-[94%] md:w-2/3 lg:w-1/2 mx-auto'>
