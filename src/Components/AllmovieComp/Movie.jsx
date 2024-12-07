@@ -1,0 +1,30 @@
+import React from 'react';
+import star from '../../assets/star-half-empty.png'
+
+const Movie = ({ movie }) => {
+
+    const { _id, title, Poster, year, rating, genre, duration, description } = movie
+    return (
+        <div className='grid grid-cols-2 gap-2'>
+            <div className=''>
+                <img className=' h-full rounded' src={Poster} alt="" />
+            </div>
+            <div className='flex flex-col'>
+                <h3 className='text-2xl font-medium'>{title}<span className='text-sm font-normal text-gray-500'> ({year})</span></h3>
+                <div className='flex justify-between'>
+                    <p><span className='hover:text-[#ffc107] link'>{genre}</span></p>
+                    <div className='text flex my-auto'>
+                      <div className=''>{rating}</div>
+                      <img className='w-5 h-5 my-auto' src={star} alt="" />
+                    </div>
+                </div>
+                <div className='text-sm font-semibold my-2'>Duration: <span className='font-normal'>{duration}m</span></div>
+                <p className='overflow-hidden text-ellipsis text-sm flex-grow'>{description}</p>
+                <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl'>See Details</button>
+            </div>
+        </div>
+
+    );
+};
+
+export default Movie;

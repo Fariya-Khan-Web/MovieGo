@@ -2,6 +2,9 @@ import { Result } from 'postcss';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
+import { Rating } from 'react-simple-star-rating'
+import '../../App.css'
+import { toast } from 'react-toastify';
 
 const AddMovie = () => {
 
@@ -13,26 +16,44 @@ const AddMovie = () => {
     const onSubmit = movie => {
         console.log(movie);
 
+        const movieWithRate = { ...movie, rating }
+        console.log(movieWithRate)
+
+        if(movieWithRate.rating<1){
+            return toast.error('Add ratings',{position: 'top-center'})
+        }
+
         fetch('http://localhost:3000/movies', {
             method: 'POST',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
-            body: JSON.stringify(movie)
+            body: JSON.stringify(movieWithRate)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.acknowledged){
-                Swal.fire({
-                    title: 'Added Successfully',
-                    text: 'Do you want to continue',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  })
-            }
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    Swal.fire({
+                        title: 'Added Successfully',
+                        text: 'Do you want to continue',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+                console.log(data)
+                setRating(0)
+            })
 
+    }
+
+    const handleRating = (rate) => {
+        setRating(rate)
+        console.log(rate)
+    }
+
+    const handleReset = () => {
+        // Set the initial value
+        setRating(0)
     }
 
 
@@ -87,12 +108,21 @@ const AddMovie = () => {
                             className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                             {...register("year", { required: "Enter a year" })}
                         >
-                            <option value="">Select a Genre</option>
+                            <option value="">Select a year</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
                         </select>
                         {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
                     </div>
@@ -111,6 +141,10 @@ const AddMovie = () => {
                             <option value="Comedy">Comedy</option>
                             <option value="Horror">Horror</option>
                             <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Animation">Animation</option>
                         </select>
                         {errors.genre && <p className="text-red-500 text-sm">{errors.genre.message}</p>}
                     </div>
@@ -123,16 +157,23 @@ const AddMovie = () => {
                     {/* Duration */}
                     <div className="mb-4">
                         <label className="block mb-2 font-medium">Duration</label>
-                        <input
+                        <input type='number'
                             className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
-                            {...register("duration", { required: "Movie duration must be 59+",
-                                min: 60, message:'minmum 60' })}
+                            {...register("duration", {
+                                required: "Movie duration must be 59+",
+                                min: 60, message: 'minmum 60'
+                            })}
                         />
                         {errors.duration && <p className="text-red-500 text-sm">{errors.duration.message}</p>}
                     </div>
 
                     {/* Rating */}
-
+                    
+                    <div className='App '>
+                    <label className="block font-medium">Rating</label>
+                        {/* set initial value */}
+                        <Rating className='my-2' onClick={handleRating} initialValue={rating} />
+                    </div>
 
                 </div>
 
@@ -146,7 +187,11 @@ const AddMovie = () => {
                             required: "Provide a short description",
                             minLength: {
                                 value: 10,
-                                message: "Title must be at least 10 characters long",
+                                message: "Summery must be at least 10 characters long",
+                            },
+                            maxLength: {
+                                value: 200,
+                                message: "Summery must be within 200 characters long",
                             },
                         })}
                     />

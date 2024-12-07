@@ -11,7 +11,7 @@ const ErrorPage = () => {
     }
 
     return (
-        <div className='min-h-screen flex justify-center items-center text-white'>
+        <div className='min-h-screen flex justify-center items-center dark:bg-[#222028] dark:text-white '>
             <div>
             <div className='flex'>
                 <div className='text-[100px] md:text-[200px]'>4</div>
