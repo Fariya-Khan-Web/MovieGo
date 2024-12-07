@@ -15,6 +15,7 @@ import AuthProvider from './Components/Provider/AuthProvider.jsx';
 import Home from './Components/Layouts/Home.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Details from './Components/HomeComp/Details.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
       {
         path: '/allmovie',
         element: <AllMovies />
+      },
+      {
+        path: '/allmovie/:id',
+        loader: ({params})=> fetch(`http://localhost:5173/allmovie/${params.id}`),
+        element:<Details/>
       },
       {
         path: '/addmovie',

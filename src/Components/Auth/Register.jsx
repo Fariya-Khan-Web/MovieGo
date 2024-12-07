@@ -103,7 +103,7 @@ const Register = () => {
                         <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Register</button>
                     </div>
                 </form>
-                <button onClick={handleGoogle} className="p-2 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl ">Login With Google</button>
+                <button onClick={handleGoogle} className="p-2 -mt-4 w-[86%] mx-auto border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Login With Google</button>
                 {/* hover:font-semibold hover:bg-[#ffc107] */}
                 <p className='text-center my-4'>Already have an account? <Link to='/login' className='hover:text-[#ffc107] link'>Login</Link> now</p>
                 <div onClick={handleShow} className='absolute bottom-[198px] right-12' >

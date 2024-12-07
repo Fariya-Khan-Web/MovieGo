@@ -34,7 +34,7 @@ const Navbar = () => {
                     <Link to='/favorites' className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
                 </>
             }
-            <Link to='/' className='hover:text-[#ffc107]'>something</Link>
+            <Link to='/' className='hover:text-[#ffc107]'>Contact Us</Link>
         </>
 
 
@@ -82,7 +82,7 @@ const Navbar = () => {
                                             src={user.photoURL} />
                                     </div>
 
-                                    <div className='p-2 px-4 absolute top-12 -left-4 z-20 bg-white border border-gray-700 text-xl font-semibold rounded opacity-0 group-hover:opacity-100'>{user.displayName}</div>
+                                    <div className='p-2 px-4 absolute top-12 -left-4 z-20 bg-white dark:bg-[#222028] border border-gray-700 text-xl font-semibold rounded opacity-0 group-hover:opacity-100'>{user.displayName}</div>
 
                                 </div>
                                 <Link onClick={handleSignOut} className="py-2 mx-2 px-4 border-2 border-[#ffc107] rounded-md hover:bg-[#ffc107]/10 hover:rounded-2xl">Sign Out</Link>

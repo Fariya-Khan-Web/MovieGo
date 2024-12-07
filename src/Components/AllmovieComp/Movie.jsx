@@ -1,5 +1,6 @@
 import React from 'react';
 import star from '../../assets/star-half-empty.png'
+import { Link } from 'react-router-dom';
 
 const Movie = ({ movie }) => {
 
@@ -7,7 +8,7 @@ const Movie = ({ movie }) => {
     return (
         <div className='grid grid-cols-2 gap-2'>
             <div className=''>
-                <img className=' h-full rounded' src={Poster} alt="" />
+                <img className='w-full h-full rounded' src={Poster} alt="" />
             </div>
             <div className='flex flex-col'>
                 <h3 className='text-2xl font-medium'>{title}<span className='text-sm font-normal text-gray-500'> ({year})</span></h3>
@@ -20,7 +21,7 @@ const Movie = ({ movie }) => {
                 </div>
                 <div className='text-sm font-semibold my-2'>Duration: <span className='font-normal'>{duration}m</span></div>
                 <p className='overflow-hidden text-ellipsis text-sm flex-grow'>{description}</p>
-                <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl'>See Details</button>
+                <Link to={`/allmovie/${_id}`} className='p-2 border-2 text-center border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>See Details</Link>
             </div>
         </div>
 
