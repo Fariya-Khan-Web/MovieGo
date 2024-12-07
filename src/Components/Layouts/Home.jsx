@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Banner from '../HomeComp/Banner';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Home = () => {
+
     return (
-        <div>
+        <div className='dark:bg-[#222028] dark:text-white'>
             <Banner/>
-            
+
         </div>
     );
 };

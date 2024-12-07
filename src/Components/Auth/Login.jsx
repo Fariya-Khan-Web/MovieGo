@@ -51,26 +51,26 @@ const Login = () => {
 
         })
     }
-
+    // bg-[#222028]
     return (
-        <div className='flex justify-center items-center'>
-            <div className="card bg-[#222028] rounded-md w-[94%] max-w-md shrink-0 shadow-2xl my-10 relative">
+        <div className='flex justify-center items-center dark:bg-[#222028] dark:text-white'>
+            <div className="card  rounded-md w-[94%] max-w-md shrink-0 shadow-2xl my-10 relative dark:bg-[#322f38]">
                 <h1 className='font-semibold text-2xl mx-auto mt-6'>Login your account</h1>
                 <hr className=' w-10/12 mx-auto mt-6' />
-                <form onSubmit={handleSubmit} className="card-body">
+                <form onSubmit={handleSubmit} className="card-body ">
                     <div className="form-control">
                         <label className="label">
                             <span className=" ">Email</span>
                         </label>
-                        <input type="email" placeholder="email" name='email' className="input input-bordered bg-[#222028]" required />
+                        <input type="email" placeholder="email" name='email' className="input input-bordered dark:bg-[#322f38] dark:text-white dark:border-gray-700" required />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="">Password</span>
                         </label>
-                        <input type={show ? 'text' : 'password'} placeholder="password" name='password' className="input input-bordered bg-[#222028]" required />
+                        <input type={show ? 'text' : 'password'} placeholder="password" name='password' className="input input-bordered dark:bg-[#322f38] dark:text-white dark:border-gray-700" required />
                         <label className="label">
-                            <p className="label-text-alt hover:text-[#ffc107]">Forgot password?</p>
+                            <span className="text-xs hover:text-[#ffc107]">Forgot password?</span>
                         </label>
                     </div>
                     <div className="form-control mt-3">

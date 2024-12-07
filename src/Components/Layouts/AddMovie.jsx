@@ -1,19 +1,38 @@
+import { Result } from 'postcss';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-
+import Swal from 'sweetalert2'
 
 const AddMovie = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [rating, setRating] = useState(0);
 
-    const urlValidation = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg))$/i;
+    const urlValidation = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp))$/i;
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = movie => {
+        console.log(movie);
 
+        fetch('http://localhost:3000/movies', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(movie)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.acknowledged){
+                Swal.fire({
+                    title: 'Added Successfully',
+                    text: 'Do you want to continue',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
+            console.log(data)
+        })
 
-        
     }
 
 
@@ -22,7 +41,7 @@ const AddMovie = () => {
         <div>
             <div className='text-center w-[94%] md:w-2/3 lg:w-1/2 mx-auto'>
                 <h1 className='text-4xl font-semibold mt-16'>Add a Movie to the Spotlight</h1>
-                <p className='text-base-content my-5'>Bring your favorite movies to life on our platform! Fill in the details below to add a new movie to our collection and help others discover cinematic gems</p>
+                <p className=' my-5'>Bring your favorite movies to life on our platform! Fill in the details below to add a new movie to our collection and help others discover cinematic gems</p>
             </div>
 
             <form className='max-w-2xl w-[90%] mx-auto my-10 md:my-16' onSubmit={handleSubmit(onSubmit)}>
@@ -31,7 +50,7 @@ const AddMovie = () => {
                 <div className="mb-4">
                     <label className="block mb-2 font-medium">Movie Title</label>
                     <input
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-2 border border-gray-300 rounded  dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                         {...register("title", {
                             required: "Title is required",
                             minLength: {
@@ -47,7 +66,7 @@ const AddMovie = () => {
                 <div className="mb-4">
                     <label className="block mb-2 font-medium">Movie Poster</label>
                     <input
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                         {...register("Poster", {
                             required: "Photo URL is required",
                             pattern: {
@@ -65,7 +84,7 @@ const AddMovie = () => {
                     <div className="mb-4">
                         <label className="block mb-2  font-medium">Release Year</label>
                         <select
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                             {...register("year", { required: "Enter a year" })}
                         >
                             <option value="">Select a Genre</option>
@@ -83,7 +102,7 @@ const AddMovie = () => {
                     <div className="mb-4">
                         <label className="block mb-2 font-medium">Genre</label>
                         <select
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                             {...register("genre", { required: "Genre is required" })}
                         >
                             <option value="">Select a Genre</option>
@@ -105,7 +124,7 @@ const AddMovie = () => {
                     <div className="mb-4">
                         <label className="block mb-2 font-medium">Duration</label>
                         <input
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                             {...register("duration", { required: "Movie duration must be 59+",
                                 min: 60, message:'minmum 60' })}
                         />
@@ -122,7 +141,7 @@ const AddMovie = () => {
                 <div className="mb-4">
                     <label className="block mb-2 font-medium">Movie Description</label>
                     <input
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                         {...register("description", {
                             required: "Provide a short description",
                             minLength: {
