@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setloading] = useState(true)
-    const [dark, setDark] = useState(false);
+    const [dark, setDark] = useState(true);
 
 
     const auth = getAuth(app);

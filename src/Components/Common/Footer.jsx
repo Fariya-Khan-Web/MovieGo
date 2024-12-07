@@ -7,7 +7,7 @@ const Footer = () => {
     const { dark, setDark} = useContext(AuthContext)
 
     return (
-        <div className='border-t border-gray-700 dark:bg-[#222028] dark:text-white text-base-content'>
+        <div className='border-t dark:border-gray-700 dark:bg-[#222028] dark:text-white text-base-content'>
             <footer className="footer p-10 max-w-screen-xl mx-auto ">
                 <aside>
                     <a className=" font-bold text-xl md:text-2xl ">Movie<span className='text-[#ffc107]'>GO</span></a>
@@ -66,7 +66,7 @@ const Footer = () => {
                     <a className="hover:text-[#ffc107]">Cookie policy</a>
                 </nav>
             </footer>
-            <hr className='w-[92%] mx-auto' />
+            <hr className='w-[92%] dark:border-gray-700 mx-auto' />
             <p className='text-center py-2 text-sm'>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
         </div>
     );
