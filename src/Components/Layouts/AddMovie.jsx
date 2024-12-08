@@ -21,6 +21,9 @@ const AddMovie = () => {
     const onSubmit = movie => {
         console.log(movie);
 
+        movie.year = Number(movie.year)
+        movie.duration = Number(movie.duration)
+
         const movieWithRate = { ...movie, rating , email }
         console.log(movieWithRate)
 
