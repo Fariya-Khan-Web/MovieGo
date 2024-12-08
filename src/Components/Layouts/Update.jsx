@@ -152,7 +152,7 @@ const Update = () => {
                     {/* Genre */}
                     <div className="mb-4">
                         <label className="block mb-2 font-medium">Genre</label>
-                        <select
+                        <select multiple
                             className="w-full p-2 border border-gray-300 rounded dark:bg-[#322f38] dark:text-white dark:border-gray-700"
                             {...register("genre", { required: "Genre is required" })}
                         >
