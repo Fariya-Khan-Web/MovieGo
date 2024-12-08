@@ -20,7 +20,6 @@ const Navbar = () => {
     const handleTheme =()=>{
         setDark(!dark)
         document.body.classList.toggle("dark");
-        console.log(dark)
     }
 
     const links =

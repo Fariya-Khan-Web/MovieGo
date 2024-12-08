@@ -6,11 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay'; 
 import 'swiper/css/scrollbar';
 import '../../App.css';
 
 // import required modules
-import { Parallax, Pagination, Navigation, Scrollbar, A11y } from 'swiper/modules';
+import { Parallax, Pagination, Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
 import slide1 from '../../assets/banner-posters/interstellar-poster.jpg'
 import slide2 from '../../assets/banner-posters/conjuring-poster.jpg'
@@ -22,11 +23,15 @@ const Slider = () => {
         <div className=' md:max-w-screen-xl lg:w-11/12 lg:my-7 mx-auto text-white'>
             <Swiper
                 // install Swiper modules
-                modules={[ Parallax, Pagination, Scrollbar, A11y]}
+                modules={[ Parallax, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={0}
                 slidesPerView={1}
                 // navigation  
                 pagination={{ clickable: true }}
+                autoplay={{
+                    delay: 3000, 
+                    disableOnInteraction: false, 
+                }}
                 scrollbar={{ draggable: true }}
                 parallax={true}
                 loop={true}

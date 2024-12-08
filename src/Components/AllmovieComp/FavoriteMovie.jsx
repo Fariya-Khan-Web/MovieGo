@@ -4,7 +4,7 @@ import star from '../../assets/star-half-empty.png'
 import Swal from 'sweetalert2';
 
 
-const FavoriteMovie = ({movie}) => {
+const FavoriteMovie = ({movie, movies, setFavorite}) => {
 
     const { _id, title, Poster, year, rating, genre, duration, description } = movie
 
@@ -26,16 +26,15 @@ const FavoriteMovie = ({movie}) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Movie removed from the list",
                                 icon: "success"
                             });
-                            const remaining = movie.filter(movie => movie._id !== id)
-                            setMovie(remaining)
-                            navigate(-1)
+                            const remaining = movies.filter(movie => movie._id !== id)
+                            setFavorite(remaining)
+                            
                         }
                     })
             }

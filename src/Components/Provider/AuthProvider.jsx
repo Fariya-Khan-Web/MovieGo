@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setloading] = useState(true)
     const [dark, setDark] = useState(true);
+    const [updateMovieData, setUpdateMovieData] = useState({});
 
 
     const auth = getAuth(app);
@@ -45,7 +46,9 @@ const AuthProvider = ({ children }) => {
         setloading,
         signOutUser,
         dark,
-        setDark
+        setDark,
+        updateMovieData, 
+        setUpdateMovieData,
     }
 
     useEffect(() => {

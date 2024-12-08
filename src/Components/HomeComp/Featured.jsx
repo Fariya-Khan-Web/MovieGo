@@ -10,7 +10,6 @@ const Featured = () => {
         fetch('http://localhost:3000/movies/top6')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setFeatured(data)
             })
     }

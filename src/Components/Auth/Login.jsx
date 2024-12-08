@@ -27,14 +27,12 @@ const Login = () => {
 
         loginUser(email, password)
             .then(result => {
-                console.log(result.user)
                 setUser(result.user)
                 toast.success('Logged in successfully', {position: "top-center"})
                 // setLoading(false)
                 navigate(location?.state ? location?.state : '/')
             })
             .catch(err => { 
-                console.log(err) 
                 toast.error('Invalid email or password, try again', {position: "top-center"})
             })
 
@@ -43,15 +41,12 @@ const Login = () => {
     const handleGoogle = () =>{
         loginGoogle()
         .then(result => {
-            console.log(result.user)
             setUser(result.user)
-            // setLoading(false)
             toast.success('User created successfully', {position: "top-center"})
             navigate(location?.state ? location?.state : '/')
 
         })
         .catch(err => {
-            console.log(err)
             toast.error('Error, try again', {position: "top-center"})
 
         })

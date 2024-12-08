@@ -20,6 +20,7 @@ import Favorites from './Components/Layouts/Favorites.jsx';
 import PrivateRoute from './Components/Private/PrivateRoute.jsx';
 import Update from './Components/Layouts/Update.jsx';
 import Contact from './Components/Layouts/Contact.jsx';
+import Updated from './Components/Layouts/Updated.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/allmovie/:id',
-        loader: ({params})=> fetch(`http://localhost:5173/movies/${params.id}`),
+        loader: ({params})=> fetch(`http://localhost:3000/movies/${params.id}`),
         element: <PrivateRoute><Details/></PrivateRoute>
       },
       {
@@ -53,8 +54,8 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AddMovie /></PrivateRoute>
       },
       {
-        path: '/movies/update/:id',  
-        loader: ({params})=> fetch(`http://localhost:5173/movies/update/${params.id}`),
+        path: '/allmovie/:id/update/:id',  
+        loader: ({params})=> fetch(`http://localhost:3000/movies/${params.id}`),
         element: <PrivateRoute><Update/></PrivateRoute>
       },
       {

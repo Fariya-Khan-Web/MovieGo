@@ -15,17 +15,16 @@ const AddMovie = () => {
 
 
     const email = user.email
-    console.log(email)
     const urlValidation = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp))$/i;
 
     const onSubmit = movie => {
-        console.log(movie);
 
         movie.year = Number(movie.year)
         movie.duration = Number(movie.duration)
 
-        const movieWithRate = { ...movie, rating , email }
-        console.log(movieWithRate)
+        const movieWithRate = { ...movie, rating, email }
+
+        console.log({ movieWithRate });
 
         if (movieWithRate.rating < 1) {
             return toast.error('Add ratings', { position: 'top-center' })
@@ -48,7 +47,6 @@ const AddMovie = () => {
                         confirmButtonText: 'Cool'
                     })
                 }
-                console.log(data)
                 reset()
                 setRating(0)
             })
@@ -57,7 +55,6 @@ const AddMovie = () => {
 
     const handleRating = (rate) => {
         setRating(rate)
-        console.log(rate)
     }
 
 

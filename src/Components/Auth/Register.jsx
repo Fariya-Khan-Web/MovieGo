@@ -28,30 +28,30 @@ const Register = () => {
 
         const regex1 = /^.{6,}$/;
 
-        if(!regex1.test(password)){
-            return toast.error('password must contain be at least 6 characters', {position: "top-center"});
+        if (!regex1.test(password)) {
+            return toast.error('password must contain be at least 6 characters', { position: "top-center" });
         }
-        if(!/[A-Z]/.test(password)){
-            return toast.error('Must have an Uppercase letter in the password', {position: "top-center"});
+        if (!/[A-Z]/.test(password)) {
+            return toast.error('Must have an Uppercase letter in the password', { position: "top-center" });
         }
-        if(!/[a-z]/.test(password)){
-            return toast.error('Must have a Lowercase letter in the password', {position: "top-center"});
+        if (!/[a-z]/.test(password)) {
+            return toast.error('Must have a Lowercase letter in the password', { position: "top-center" });
         }
 
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
                 setUser(result.user)
                 updateUserProfile({ displayName: name, photoURL: photo })
                     .then(() => {
-                        console.log(`user name ${name}`)
+
                     })
-                    .catch(err => { console.log(err) })
+                    .catch(err => {
+
+                    })
                 toast.success('User created successfully', { position: "top-center" })
                 navigate('/')
             })
             .catch(err => {
-                console.log(err)
                 toast.error('Error', { position: "top-center" })
             })
 
@@ -60,13 +60,11 @@ const Register = () => {
     const handleGoogle = () => {
         loginGoogle()
             .then(result => {
-                console.log(result.user)
                 setUser(result.user)
                 toast.success('User created successfully', { position: "top-center" })
                 navigate('/')
             })
             .catch(err => {
-                console.log(err)
                 toast.error('Error', { position: "top-center" })
             })
     }
@@ -101,7 +99,7 @@ const Register = () => {
                             <span className="">Password</span>
                         </label>
                         <input type={show ? 'text' : 'password'} placeholder="password" name='password' className="input input-bordered dark:bg-[#322f38]  dark:border-gray-700" required />
-                        
+
                     </div>
                     <div className="form-control mt-3">
                         <button className="p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl">Register</button>

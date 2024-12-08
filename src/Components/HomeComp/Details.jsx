@@ -8,7 +8,7 @@ const Details = () => {
 
     const { id } = useParams()
     const [movie, setMovie] = useState([])
-    const { user } = useContext(AuthContext)
+    const { user , setUpdateMovieData} = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -16,8 +16,8 @@ const Details = () => {
         fetch(`http://localhost:3000/movies/${id}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setMovie(data)
+                setUpdateMovieData(data)
             })
     }, [])
 
@@ -41,7 +41,6 @@ const Details = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
@@ -110,7 +109,6 @@ const Details = () => {
     };
 
 
-    console.log(id)
     return (
         <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
             <div className='grid md:grid-cols-3 gap-2'>
@@ -130,7 +128,7 @@ const Details = () => {
                         </div>
                         <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
                     </div>
-                    <Link to={`/movies/update/${_id}`} className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
+                    <Link to={`update/${_id}`} className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
                     <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
                     <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
                 </div>
