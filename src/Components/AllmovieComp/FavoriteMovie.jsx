@@ -1,12 +1,19 @@
 import React from 'react';
-import star from '../../assets/star-half-empty.png'
 import { Link } from 'react-router-dom';
+import star from '../../assets/star-half-empty.png'
 
-const Movie = ({ movie }) => {
+
+const FavoriteMovie = ({movie}) => {
 
     const { _id, title, Poster, year, rating, genre, duration, description } = movie
+
+    const handleRemove = () =>{
+
+    }
+
     return (
         <div className='grid grid-cols-2 gap-2'>
+          
             <div className=''>
                 <img className='w-full h-full rounded' src={Poster} alt="" />
             </div>
@@ -15,17 +22,16 @@ const Movie = ({ movie }) => {
                 <div className='flex justify-between'>
                     <p><span className='hover:text-[#ffc107] link'>{genre}</span></p>
                     <div className='text flex my-auto'>
-                      <div className=''>{rating}</div>
-                      <img className='w-5 h-5 my-auto' src={star} alt="" />
+                        <div className=''>{rating}</div>
+                        <img className='w-5 h-5 my-auto' src={star} alt="" />
                     </div>
                 </div>
                 <div className='text-sm font-semibold my-2'>Duration: <span className='font-normal'>{duration}m</span></div>
                 <p className='overflow-hidden text-ellipsis text-sm flex-grow'>{description}</p>
-                <Link to={`/allmovie/${_id}`} className='p-2 border-2 text-center border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>See Details</Link>
+                <button onClick={()=>handleRemove(_id)} className='p-2 border-2 text-center border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Remove</button>
             </div>
         </div>
-
     );
 };
 
-export default Movie;
+export default FavoriteMovie;

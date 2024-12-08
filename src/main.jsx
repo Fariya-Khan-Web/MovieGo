@@ -19,6 +19,7 @@ import Details from './Components/HomeComp/Details.jsx';
 import Favorites from './Components/Layouts/Favorites.jsx';
 import PrivateRoute from './Components/Private/PrivateRoute.jsx';
 import Update from './Components/Layouts/Update.jsx';
+import Contact from './Components/Layouts/Contact.jsx';
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/allmovie/:id',
-        loader: ({params})=> fetch(`http://localhost:5173/allmovie/${params.id}`),
+        loader: ({params})=> fetch(`http://localhost:5173/movies/${params.id}`),
         element: <PrivateRoute><Details/></PrivateRoute>
       },
       {
@@ -52,13 +53,18 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AddMovie /></PrivateRoute>
       },
       {
-        path: '/update',
+        path: '/movies/update/:id',  
+        loader: ({params})=> fetch(`http://localhost:5173/movies/update/${params.id}`),
         element: <PrivateRoute><Update/></PrivateRoute>
       },
       {
         path: '/myfavorites',
         element: <PrivateRoute><Favorites/></PrivateRoute>
-      }
+      },
+      {
+        path: '/contact',
+        element: <Contact/>
+      },
       
     ]
   },

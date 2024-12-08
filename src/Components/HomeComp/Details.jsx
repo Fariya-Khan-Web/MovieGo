@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import star from '../../assets/star-half-empty.png'
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Details = () => {
 
     const { id } = useParams()
     const [movie, setMovie] = useState([])
+    const {user} = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -19,7 +21,7 @@ const Details = () => {
             })
     }, [])
 
-    const { _id, title, Poster, genre, rating, duration, year, description } = movie
+    const { _id, title, Poster, genre, rating, duration, year, description, email} = movie
 
     const handleDelete = (id) => {
 
@@ -55,6 +57,74 @@ const Details = () => {
 
     }
 
+    // const handleFavorite = () =>{
+    //     fetch(`http://localhost:3000/favorites`, {
+    //         method: 'POST',
+    //         header:{
+    //             'content-type' : 'application/json',
+    //         },
+    //         body: JSON.stringify(movie)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data =>{
+    //         console.log(data)
+    //         alert('added')
+    //     })
+
+    // }
+
+    const handleFavorite = () => {
+        fetch(`http://localhost:3000/favorites/${user.email}`)
+            .then(res => res.json())
+            .then(favorites => {
+                const isAlreadyFavorited = favorites.some(fav => fav._id === _id);
+                if (isAlreadyFavorited) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Already Added',
+                        text: 'This movie is already in your favorites!'
+                    });
+                    return;
+                }
+
+                const movieData = {
+                    movie,
+                    email: user.email
+                };
+
+                fetch('http://localhost:3000/favorites', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(movieData)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Added to Favorites',
+                            text: 'The movie has been added to your favorites!'
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'There was an issue adding the movie to your favorites.'
+                        });
+                    });
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'There was an issue checking your favorites.'
+                });
+            });
+    };
+
+
     console.log(id)
     return (
         <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
@@ -75,8 +145,8 @@ const Details = () => {
                         </div>
                         <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
                     </div>
-                    <Link to='/update' className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
-                    <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
+                    <Link to={`/movies/update/${_id}`} className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
+                    <button onClick={()=>handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
                     <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
                 </div>
             </div>

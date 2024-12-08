@@ -6,6 +6,7 @@ import { Rating } from 'react-simple-star-rating'
 import '../../App.css'
 import { toast } from 'react-toastify';
 import { AuthContext } from '../Provider/AuthProvider';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Update = () => {
 
@@ -13,9 +14,14 @@ const Update = () => {
     const { user } = useContext(AuthContext)
     const [rating, setRating] = useState(0);
 
+    const navigate = useNavigate()
+    const { id } = useParams()
+    console.log(id)
+
 
     const email = user.email
     console.log(email)
+    
     const urlValidation = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp))$/i;
 
     const onSubmit = movie => {
@@ -28,8 +34,8 @@ const Update = () => {
             return toast.error('Add ratings', { position: 'top-center' })
         }
 
-        fetch('http://localhost:3000/movies', {
-            method: 'POST',
+        fetch(`http://localhost:3000/movies/${id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -39,7 +45,7 @@ const Update = () => {
             .then(data => {
                 if (data.acknowledged) {
                     Swal.fire({
-                        title: 'Added Successfully',
+                        title: 'Updated Successfully',
                         text: 'Do you want to continue',
                         icon: 'success',
                         confirmButtonText: 'Cool'
@@ -48,6 +54,7 @@ const Update = () => {
                 console.log(data)
                 reset()
                 setRating(0)
+                navigate(-1)
             })
 
     }

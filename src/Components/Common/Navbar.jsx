@@ -34,7 +34,7 @@ const Navbar = () => {
                     <Link to='/myfavorites' className='lg:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
                 </>
             }
-            <Link to='/' className='hover:text-[#ffc107]'>Contact Us</Link>
+            <Link to='/contact' className='hover:text-[#ffc107]'>Contact Us</Link>
         </>
 
 

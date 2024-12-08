@@ -30,7 +30,7 @@ const Login = () => {
                 console.log(result.user)
                 setUser(result.user)
                 setLoading(false)
-                toast.success('User created successfully', {position: "top-center"})
+                toast.success('Logged in successfully', {position: "top-center"})
                 navigate(location?.state ? location?.state : '/')
             })
             .catch(err => { 
@@ -52,7 +52,7 @@ const Login = () => {
         })
         .catch(err => {
             console.log(err)
-            toast.error('Error', {position: "top-center"})
+            toast.error('Error, try again', {position: "top-center"})
 
         })
     }
