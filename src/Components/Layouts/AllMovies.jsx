@@ -17,7 +17,7 @@ const AllMovies = () => {
     const filteredMovies = movies.filter((movie) => movie.title.toLowerCase().includes(search));
 
     useEffect(() => {
-        fetch('http://localhost:3000/movies')
+        fetch('https://movie-portal-server-one.vercel.app//movies')
             .then(res => res.json())
             .then(data => {
                 setMovies(data)

@@ -13,7 +13,7 @@ const Details = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/movies/${id}`)
+        fetch(`https://movie-portal-server-one.vercel.app//movies/${id}`)
             .then(res => res.json())
             .then(data => {
                 setMovie(data)
@@ -36,7 +36,7 @@ const Details = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:3000/movies/${id}`, {
+                fetch(`https://movie-portal-server-one.vercel.app//movies/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -58,7 +58,7 @@ const Details = () => {
 
 
     const handleFavorite = () => {
-        fetch(`http://localhost:3000/favorites/${user.email}`)
+        fetch(`https://movie-portal-server-one.vercel.app//favorites/${user.email}`)
             .then(res => res.json())
             .then(favorites => {
                 const isAlreadyFavorited = favorites.some(fav => fav._id === _id);
@@ -76,7 +76,7 @@ const Details = () => {
                     email: user.email
                 };
 
-                fetch('http://localhost:3000/favorites', {
+                fetch('https://movie-portal-server-one.vercel.app//favorites', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

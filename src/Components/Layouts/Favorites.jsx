@@ -8,7 +8,7 @@ const Favorites = () => {
     const [favorite, setFavorite] = useState([])
 
     useEffect(()=>{
-        fetch(`http://localhost:3000/favorites/${user.email}`)
+        fetch(`https://movie-portal-server-one.vercel.app//favorites/${user.email}`)
         .then(res => res.json())
         .then(data => {
             setFavorite(data)

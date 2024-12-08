@@ -30,7 +30,7 @@ const AddMovie = () => {
             return toast.error('Add ratings', { position: 'top-center' })
         }
 
-        fetch('http://localhost:3000/movies', {
+        fetch('https://movie-portal-server-one.vercel.app//movies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
