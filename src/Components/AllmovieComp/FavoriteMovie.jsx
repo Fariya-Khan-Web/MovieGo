@@ -21,7 +21,7 @@ const FavoriteMovie = ({movie, movies, setFavorite}) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`https://movie-portal-server-one.vercel.app//favorites/${id}`, {
+                fetch(`https://movie-portal-server-one.vercel.app/favorites/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

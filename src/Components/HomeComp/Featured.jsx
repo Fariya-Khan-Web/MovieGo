@@ -7,7 +7,7 @@ const Featured = () => {
     const [featured, setFeatured] = useState([])
 
     useEffect(() => {
-        fetch('https://movie-portal-server-one.vercel.app//movies/top6')
+        fetch('https://movie-portal-server-one.vercel.app/movies/top6')
             .then(res => res.json())
             .then(data => {
                 setFeatured(data)

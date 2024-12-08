@@ -48,7 +48,7 @@ const Update = () => {
             return toast.error('Add ratings', { position: 'top-center' })
         }
 
-        fetch(`https://movie-portal-server-one.vercel.app//movies/${id}`, {
+        fetch(`https://movie-portal-server-one.vercel.app/movies/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
