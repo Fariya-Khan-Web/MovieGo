@@ -8,7 +8,7 @@ const Details = () => {
 
     const { id } = useParams()
     const [movie, setMovie] = useState([])
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ const Details = () => {
             })
     }, [])
 
-    const { _id, title, Poster, genre, rating, duration, year, description, email} = movie
+    const { _id, title, Poster, genre, rating, duration, year, description, email } = movie
 
     const handleDelete = (id) => {
 
@@ -57,21 +57,6 @@ const Details = () => {
 
     }
 
-    // const handleFavorite = () =>{
-    //     fetch(`http://localhost:3000/favorites`, {
-    //         method: 'POST',
-    //         header:{
-    //             'content-type' : 'application/json',
-    //         },
-    //         body: JSON.stringify(movie)
-    //     })
-    //     .then(res => res.json())
-    //     .then(data =>{
-    //         console.log(data)
-    //         alert('added')
-    //     })
-
-    // }
 
     const handleFavorite = () => {
         fetch(`http://localhost:3000/favorites/${user.email}`)
@@ -130,7 +115,7 @@ const Details = () => {
         <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
             <div className='grid md:grid-cols-3 gap-2'>
                 <div>
-                    <img className='h-[500px] mx-auto rounded' src={Poster} alt="" />
+                    <img className=' mx-auto rounded' src={Poster} alt="" />
                 </div>
                 <div className='md:col-span-2 flex flex-col space-y-2'>
                     <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
@@ -146,11 +131,15 @@ const Details = () => {
                         <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
                     </div>
                     <Link to={`/movies/update/${_id}`} className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
-                    <button onClick={()=>handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
+                    <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
                     <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
                 </div>
             </div>
-            
+            <div className='flex justify-center my-10'>
+                <Link to='/allmovie' className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>All movies</Link>
+
+            </div>
+
         </div>
     );
 };

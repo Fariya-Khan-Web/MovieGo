@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { FaInstagram } from "react-icons/fa";
-import { AuthContext } from '../Provider/AuthProvider';
+
 
 const Footer = () => {
 
-    const { dark, setDark} = useContext(AuthContext)
 
     return (
         <div className='border-t dark:border-gray-700 dark:bg-[#222028] dark:text-white text-base-content'>

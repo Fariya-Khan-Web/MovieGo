@@ -29,13 +29,13 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 setUser(result.user)
-                setLoading(false)
                 toast.success('Logged in successfully', {position: "top-center"})
+                // setLoading(false)
                 navigate(location?.state ? location?.state : '/')
             })
             .catch(err => { 
                 console.log(err) 
-                toast.error('Error', {position: "top-center"})
+                toast.error('Invalid email or password, try again', {position: "top-center"})
             })
 
     }
