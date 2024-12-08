@@ -24,7 +24,7 @@ const AddMovie = () => {
 
         const movieWithRate = { ...movie, rating, email }
 
-        console.log({ movieWithRate });
+
 
         if (movieWithRate.rating < 1) {
             return toast.error('Add ratings', { position: 'top-center' })

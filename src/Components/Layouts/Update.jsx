@@ -43,9 +43,6 @@ const Update = () => {
 
         const movieWithRate = { ...movie, rating, email }
 
-        console.log({ movieWithRate });
-        console.log(id);
-
 
         if (movieWithRate.rating < 1) {
             return toast.error('Add ratings', { position: 'top-center' })
@@ -68,7 +65,7 @@ const Update = () => {
                         confirmButtonText: 'Cool'
                     })
                 }
-                reset()
+                // reset()
                 setRating(0)
                 navigate(-1)
             })
