@@ -48,7 +48,7 @@ const Register = () => {
                     })
                     .catch(err => { console.log(err) })
                 toast.success('User created successfully', { position: "top-center" })
-                navigate(location?.state ? location?.state : '/')
+                navigate('/')
             })
             .catch(err => {
                 console.log(err)
@@ -63,7 +63,7 @@ const Register = () => {
                 console.log(result.user)
                 setUser(result.user)
                 toast.success('User created successfully', { position: "top-center" })
-                navigate(location?.state ? location?.state : '/')
+                navigate('/')
             })
             .catch(err => {
                 console.log(err)

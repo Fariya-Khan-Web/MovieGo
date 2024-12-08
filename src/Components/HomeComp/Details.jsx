@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import star from '../../assets/star-half-empty.png'
 import Swal from 'sweetalert2';
 
@@ -47,18 +47,22 @@ const Details = () => {
                                 icon: "success"
                             });
                             navigate(-1)
+
                         }
                     })
             }
         });
+
     }
 
-
+    console.log(id)
     return (
         <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
-            <div className=' md:flex  gap-5'>
-                <img className='h-[500px] mx-auto rounded' src={Poster} alt="" />
-                <div className=''>
+            <div className='grid md:grid-cols-3 gap-2'>
+                <div>
+                    <img className='h-[500px] mx-auto rounded' src={Poster} alt="" />
+                </div>
+                <div className='md:col-span-2 flex flex-col space-y-2'>
                     <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
                     <hr className='my-5 w-[80%]' />
                     <div className='md:text-lg lg:text-xl my-5 md:w-[70%]'>{description}</div>
@@ -71,12 +75,12 @@ const Details = () => {
                         </div>
                         <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
                     </div>
+                    <Link to='/update' className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
+                    <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
+                    <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-4 my-6'>
-                <button className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
-                <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
-            </div>
+            
         </div>
     );
 };

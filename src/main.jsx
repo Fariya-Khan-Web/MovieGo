@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Details from './Components/HomeComp/Details.jsx';
 import Favorites from './Components/Layouts/Favorites.jsx';
 import PrivateRoute from './Components/Private/PrivateRoute.jsx';
+import Update from './Components/Layouts/Update.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: '/addmovie',
         element: <PrivateRoute><AddMovie /></PrivateRoute>
+      },
+      {
+        path: '/update',
+        element: <PrivateRoute><Update/></PrivateRoute>
       },
       {
         path: '/myfavorites',

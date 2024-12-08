@@ -26,12 +26,12 @@ const Navbar = () => {
     const links =
         <>
             <Link to='/' className='hover:text-[#ffc107] '>Home</Link>
-            <Link to='/allmovie' className='md:mx-3 hover:text-[#ffc107]'>All movies</Link>
+            <Link to='/allmovie' className='lg:mx-3 hover:text-[#ffc107]'>All movies</Link>
             {
                 user &&
                 <>
                     <Link to='/addmovie' className='hover:text-[#ffc107]'>Add Movies</Link>
-                    <Link to='/myfavorites' className='md:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
+                    <Link to='/myfavorites' className='lg:mx-3 hover:text-[#ffc107]'>My Favorites</Link>
                 </>
             }
             <Link to='/' className='hover:text-[#ffc107]'>Contact Us</Link>
@@ -59,7 +59,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content dark:bg-[#322f38]  rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {links}
                         </ul>
                     </div>
