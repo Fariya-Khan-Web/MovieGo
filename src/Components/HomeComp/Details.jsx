@@ -3,12 +3,16 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import star from '../../assets/star-half-empty.png'
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthProvider';
+import { MdDeleteOutline, MdOutlineEdit } from 'react-icons/md';
+import { CiHeart } from 'react-icons/ci';
+import Rating from '../Common/Rating';
+
 
 const Details = () => {
 
     const { id } = useParams()
     const [movie, setMovie] = useState([])
-    const { user , setUpdateMovieData} = useContext(AuthContext)
+    const { user, setUpdateMovieData } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -110,28 +114,45 @@ const Details = () => {
 
 
     return (
-        <div className='max-w-screen-xl w-[94%] mx-auto my-10'>
-            <div className='grid md:grid-cols-3 gap-2'>
-                <div>
-                    <img className=' mx-auto rounded' src={Poster} alt="" />
+        <div className='max-w-screen-lg w-[94%] mx-auto my-10'>
+            <div className='flex gap-7'>
+
+                <div className='w-full'>
+                    <img className='rounded lg:max-h-[900px]' src={Poster} alt="" />
                 </div>
-                <div className='md:col-span-2 flex flex-col space-y-2'>
-                    <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
+
+
+                <div className=' flex flex-col space-y-2'>
+                    <div className='flex justify-between'>
+                        <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
+
+                        <Rating rating={rating} />
+
+
+                    </div>
                     <hr className='my-5 w-[80%]' />
                     <div className='md:text-lg lg:text-xl my-5 md:w-[70%]'>{description}</div>
-                    <div className='flex-grow font-bold lg:text-2xl md:text-xl'>
+                    <div className=' font-bold lg:text-2xl md:text-xl'>
                         <div className=' my-3'>Release Year: <span className='font-normal'>{year}</span></div>
                         <div className=' my-3'>Duration: <span className='font-normal'>{duration}</span></div>
-                        <div className=' my-3 flex gap-1'>Rating:
+                        <div className=' my-3 flex gap-1'>
                             <div className='ml-2'>{rating}</div>
                             <img className='w-5 h-5 my-auto' src={star} alt="" />
                         </div>
                         <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
                     </div>
-                    <Link to={`update/${_id}`} className='p-2 text-center border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Update Movie</Link>
-                    <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Add to Favorite</button>
-                    <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>Delete Movie</button>
+
+
+                    <div className='text-xl flex gap-2 text-[#ffc107]'>
+
+                        <Link to={`update/${_id}`} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdOutlineEdit /></Link>
+                        <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><CiHeart /></button>
+                        <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdDeleteOutline /></button>
+                    </div>
                 </div>
+
+
+
             </div>
             <div className='flex justify-center my-10'>
                 <Link to='/allmovie' className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>All movies</Link>
