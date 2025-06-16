@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen dark:bg-[#222028] dark:text-white">
+    <div className="min-h-screen bg-[#ffc107]/[0.06] dark:bg-[#222028] dark:text-white">
       <Navbar/>
       <Outlet/>
       <Footer/>
