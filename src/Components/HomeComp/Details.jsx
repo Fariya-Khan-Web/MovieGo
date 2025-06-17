@@ -114,48 +114,55 @@ const Details = () => {
 
 
     return (
-        <div className='max-w-screen-lg w-[94%] mx-auto my-10'>
-            <div className='flex gap-7'>
+        <div className='max-w-screen-lg w-[94%] mx-auto my-24'>
 
-                <div className='w-full'>
-                    <img className='rounded lg:max-h-[900px]' src={Poster} alt="" />
+
+            <div className='grid grid-cols-3 gap-7'>
+
+                <div className=''>
+                    <img className='rounded' src={Poster} alt="" />
                 </div>
 
 
-                <div className=' flex flex-col space-y-2'>
-                    <div className='flex justify-between'>
+                <div className='col-span-2 flex flex-col space-y-2'>
+
+
+                    <div className='flex gap-3 items-end'>
                         <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
-
-                        <Rating rating={rating} />
-
-
+                        <p className='text-gray-600 text-xl'>({year})</p>
                     </div>
-                    <hr className='my-5 w-[80%]' />
-                    <div className='md:text-lg lg:text-xl my-5 md:w-[70%]'>{description}</div>
-                    <div className=' font-bold lg:text-2xl md:text-xl'>
-                        <div className=' my-3'>Release Year: <span className='font-normal'>{year}</span></div>
-                        <div className=' my-3'>Duration: <span className='font-normal'>{duration}</span></div>
-                        <div className=' my-3 flex gap-1'>
-                            <div className='ml-2'>{rating}</div>
-                            <img className='w-5 h-5 my-auto' src={star} alt="" />
+
+
+                    <hr className='mt-10' />
+
+
+                    <div className='md:text-lg lg:text-xl py-4'>{description}</div>
+
+
+                    <div className='text-xl flex justify-between items-start flex-grow text-[#ffc107]'>
+                        
+                        <div>
+                            <Rating rating={rating} />
+
+                            <div className='flex gap-4 text-lg text-gray-500'>
+                                <div className=''>{duration}m</div>
+                                <div className=''>#{genre}</div>
+
+                            </div>
                         </div>
-                        <div className=' my-3'>Genre: <span className='font-normal'>{genre}</span></div>
+
+
+                        <div className='flex items-center justify-end gap-2'>
+                            <Link to={`update/${_id}`} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdOutlineEdit /></Link>
+                            <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><CiHeart /></button>
+                            <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdDeleteOutline /></button>
+                        </div>
                     </div>
 
-
-                    <div className='text-xl flex gap-2 text-[#ffc107]'>
-
-                        <Link to={`update/${_id}`} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdOutlineEdit /></Link>
-                        <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><CiHeart /></button>
-                        <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdDeleteOutline /></button>
+                    <div className='flex justify-center my-10'>
+                        <Link to='/allmovie' className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>All movies</Link>
                     </div>
                 </div>
-
-
-
-            </div>
-            <div className='flex justify-center my-10'>
-                <Link to='/allmovie' className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>All movies</Link>
 
             </div>
 
