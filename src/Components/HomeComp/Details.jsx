@@ -114,22 +114,25 @@ const Details = () => {
 
 
     return (
-        <div className='max-w-screen-lg w-[94%] mx-auto my-24'>
+        <div className='max-w-screen-xl w-[94%] mx-auto my-24 border p-6 rounded-md'>
 
 
-            <div className='grid grid-cols-3 gap-7'>
+            <div className='grid md:grid-cols-3 gap-7'>
 
-                <div className=''>
+                <div className='w-full h-full'>
                     <img className='rounded' src={Poster} alt="" />
                 </div>
 
 
                 <div className='col-span-2 flex flex-col space-y-2'>
 
+                    <div className='md:flex justify-between'>
 
-                    <div className='flex gap-3 items-end'>
-                        <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
-                        <p className='text-gray-600 text-xl'>({year})</p>
+                        <div className='flex gap-3 items-end'>
+                            <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
+                            <p className='text-gray-600 text-xl'>({year})</p>
+                        </div>
+                        <Rating rating={rating} />
                     </div>
 
 
@@ -139,20 +142,18 @@ const Details = () => {
                     <div className='md:text-lg lg:text-xl py-4'>{description}</div>
 
 
-                    <div className='text-xl flex justify-between items-start flex-grow text-[#ffc107]'>
-                        
-                        <div>
-                            <Rating rating={rating} />
 
-                            <div className='flex gap-4 text-lg text-gray-500'>
-                                <div className=''>{duration}m</div>
-                                <div className=''>#{genre}</div>
+                    <div className='text-xl md:flex justify-between items-start flex-grow text-[#ffc107]'>
 
-                            </div>
+                        <div className='flex gap-4 text-lg text-gray-500'>
+                            <div className=''>{duration}m</div>
+                            <div className=''>#{genre}</div>
+
                         </div>
 
 
-                        <div className='flex items-center justify-end gap-2'>
+
+                        <div className='flex items-center md:justify-end max-sm:py-4 gap-2'>
                             <Link to={`update/${_id}`} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdOutlineEdit /></Link>
                             <button onClick={() => handleFavorite(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><CiHeart /></button>
                             <button onClick={() => handleDelete(_id)} className='p-2 border-2 border-[#ffc107] rounded-full hover:rounded-2xl hover:bg-[#ffc107]/10'><MdDeleteOutline /></button>
