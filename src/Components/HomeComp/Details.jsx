@@ -114,7 +114,7 @@ const Details = () => {
 
 
     return (
-        <div className='max-w-screen-xl w-[94%] mx-auto my-24 border p-6 rounded-md'>
+        <div className='max-w-screen-lg w-[94%] mx-auto my-24 border dark:border-gray-600 p-6 rounded-md'>
 
 
             <div className='grid md:grid-cols-3 gap-7'>
@@ -130,13 +130,13 @@ const Details = () => {
 
                         <div className='flex gap-3 items-end'>
                             <h1 className='text-3xl md:text-5xl lg:text-6xl font-semibold'>{title}</h1>
-                            <p className='text-gray-600 text-xl'>({year})</p>
+                            <p className='text-gray-500 text-xl'>({year})</p>
                         </div>
                         <Rating rating={rating} />
                     </div>
 
 
-                    <hr className='mt-10' />
+                    <hr className='mt-10 dark:border-gray-500' />
 
 
                     <div className='md:text-lg lg:text-xl py-4'>{description}</div>
