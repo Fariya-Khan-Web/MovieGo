@@ -6,6 +6,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 import { MdDeleteOutline, MdOutlineEdit } from 'react-icons/md';
 import { CiHeart } from 'react-icons/ci';
 import Rating from '../Common/Rating';
+import { FaArrowLeft, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 
 
 const Details = () => {
@@ -26,6 +27,7 @@ const Details = () => {
     }, [])
 
     const { _id, title, Poster, genre, rating, duration, year, description, email } = movie
+    console.log(movie)
 
     const handleDelete = (id) => {
 
@@ -160,8 +162,12 @@ const Details = () => {
                         </div>
                     </div>
 
-                    <div className='flex justify-center my-10'>
-                        <Link to='/allmovie' className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10'>All movies</Link>
+                    <div className='flex gap-2 justify-center my-10'>
+                        <button
+                            onClick={() => navigate(-1)}
+                            className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10 flex items-center justify-center gap-3'><FaLongArrowAltLeft className='text-[#ffc107]' />Go Back</button>
+                        <Link to='/allmovie'
+                            className='p-2 w-full text-center  border-2 border-[#ffc107] rounded-md hover:rounded-2xl hover:bg-[#ffc107]/10 flex items-center justify-center gap-3'>All movies <FaLongArrowAltRight className='text-[#ffc107]' /></Link>
                     </div>
                 </div>
 
